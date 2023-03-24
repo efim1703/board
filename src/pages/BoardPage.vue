@@ -53,7 +53,6 @@ import CardDTO from '@/interfaces/Card/CardDTO';
 import ProjectDTO from '@/interfaces/Project/ProjectDTO';
 import CardInterface from '@/interfaces/Card/CardInterface';
 import OptionInterface from '@/interfaces/OptionInterface';
-import CardForm from '@/blocks/board/CardForm.vue';
 
 const stages = ref([] as StageDTO[])
 const cards = ref([] as CardDTO[])
