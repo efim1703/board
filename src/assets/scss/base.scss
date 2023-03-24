@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import './variables.scss';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+// todo: скролл скрыть
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: $grey-light;
+    color: $primary;
+}
+
+a,
+a:active {
+    text-decoration: none;
+    color: $primary;
+}
+
+button,
+button:active,
+button:hover {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    border: none;
+    color: $primary;
+}
+
+input,
+input:active,
+input:hover,
+input:focus {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}

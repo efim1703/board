@@ -1,0 +1,20 @@
+// поменять на 70% по дизайну
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.h1-title {
+    font-weight: 700px;
+    font-size: 32px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.25s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
