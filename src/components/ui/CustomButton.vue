@@ -2,8 +2,7 @@
 	<button
 		class="button"
 		:disabled="props.disabled"
-		@click="$emit('click')"
-	>	
+	>
 		<span class="title">
 			{{ props.title }}
 		</span>

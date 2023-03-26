@@ -1,0 +1,66 @@
+@import '@/assets/scss/variables.scss';
+
+.form {
+    min-width: 380px;
+    max-width: 380px;
+
+    &__title {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    &__subtitle {
+        font-size: 12px;
+        color: $secondary;
+        margin-top: 4px;
+    }
+
+    &__input {
+        width: 100%;
+        margin-top: 20px;
+
+        &--score {
+            ::v-deep(.input) {
+                max-width: 80px;
+            }
+        }
+    }
+
+    &__select {
+        margin-top: 20px;
+        &__label {
+            color: $secondary;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        ::v-deep(.select) {
+            width: 100%;
+            background: $grey-background;
+
+
+            .select__sub-menu {
+                background: $grey-background;
+            }
+        }
+
+        &.error span {
+            color: $error;
+            font-size: 12px;
+        }
+    }
+
+    &__action {
+        text-align: center;
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    &__btn--prev {
+        color: $secondary;
+        padding: 8px 20px;
+    }
+}

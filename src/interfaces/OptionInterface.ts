@@ -1,4 +1,4 @@
 export default interface OptionInterface {
-    id: number,
+    id: number | string,
     title: string,
 }

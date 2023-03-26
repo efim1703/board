@@ -3,11 +3,11 @@
 		<div
 			v-if="props.value"
 			:class="['dialog', { 'active': props.value }]"
-			@click.self="$emit('input', false)"
+			@click.self="$emit('update:value', false)"
 		>
 			<div class="dialog_wrapper">
-				<div class="dialog_close icon" @click="$emit('input', false)">
-					<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"  style="enable-background:new 0 0 512 512" viewBox="0 0 32 32"><path d="m17.72508 16 5.23746-5.23746a1.22 1.22 0 0 0-1.72508-1.72508L16 14.27492l-5.23746-5.23746a1.22 1.22 0 0 0-1.72508 1.72508L14.27492 16l-5.23746 5.23746a1.22 1.22 0 0 0 1.72508 1.72508L16 17.72508l5.23746 5.23746a1.22 1.22 0 0 0 1.72508-1.72508z" data-original="#000000"/><path d="M28.2 31.86H3.8A3.66 3.66 0 0 1 .14 28.2V3.8A3.66 3.66 0 0 1 3.8.14h24.4a3.66 3.66 0 0 1 3.66 3.66v24.4a3.66 3.66 0 0 1-3.66 3.66zM3.8 2.58A1.22 1.22 0 0 0 2.58 3.8v24.4a1.22 1.22 0 0 0 1.22 1.22h24.4a1.22 1.22 0 0 0 1.22-1.22V3.8a1.22 1.22 0 0 0-1.22-1.22z" data-original="#000000"/></svg>
+				<div class="dialog_close icon" @click="$emit('update:value', false)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.7636 3.36584C22.0761 3.05342 22.0761 2.54689 21.7636 2.23447C21.4512 1.92205 20.9447 1.92205 20.6323 2.23447L12 10.8667L3.3678 2.23447C3.05538 1.92205 2.54885 1.92205 2.23643 2.23447C1.92401 2.54689 1.92401 3.05342 2.23643 3.36584L10.8687 11.9981L2.23496 20.6318C1.92254 20.9442 1.92254 21.4508 2.23496 21.7632C2.54737 22.0756 3.05391 22.0756 3.36633 21.7632L12 13.1295L20.6337 21.7632C20.9462 22.0756 21.4527 22.0756 21.7651 21.7632C22.0775 21.4508 22.0775 20.9442 21.7651 20.6318L13.1314 11.9981L21.7636 3.36584Z" fill="currentColor"/></svg>
 				</div>
 				<slot></slot>
 			</div>
@@ -26,6 +26,8 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+    @import '@/assets/scss/variables.scss';
+
 	.dialog {
 		display: flex;
 		position: fixed;
@@ -34,25 +36,22 @@ const props = defineProps({
 		top: 0;
 		right: 0;
 		z-index: 20;
-		background: rgba(0, 0, 0, 0.3);
-		backdrop-filter: blur(4px);
-		align-items: center;
-		text-align: center;
+        background: $background-blur;
+        align-items: center;
+        justify-content: center;
 		overflow-x: hidden;
 		overflow-y: auto;
 
 		&_wrapper {
 			position: relative;
-			padding: 30px 60px;
+			padding: 30px;
 			margin: 0 auto;
-			background: white;
-			border-radius: 5px;
+			background: #fff;
+            border-radius: 4px;
 		}
 
 		&_close {
-			position: absolute;
-			top: 10px;
-			right: 10px;
+            float: right;
 			background: transparent;
 			cursor: pointer;
 		}
