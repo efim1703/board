@@ -1,19 +1,6 @@
 # app-board
 
-## Project setup
-```
-yarn install
-```
+## Доска с карточками. Стэк: Vue3, TypeScript. Libs: Draganddrop. С добавлением, редактирвоанием, удалением сортировкой и фильтрацией карточек. 
+## Архитектура проекта выбрана для значительного расширения проекта в будущем.
+![image](https://user-images.githubusercontent.com/107515334/227808153-ec1248db-62a6-4cc7-9aea-5cc2b86a949d.png)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
