@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, watch, PropType, computed, nextTick} from 'vue';
+import {ref, watch, PropType, computed} from 'vue';
 import StageItem from '@/blocks/board/StageItem.vue';
 import CustomSelect from '@/components/ui/CustomSelect.vue'
 import CustomButton from '@/components/ui/CustomButton.vue';
@@ -223,7 +223,6 @@ const changeStageCard = (params: IDraggableEvent) => {
         const cards = [...props.cards].map(el => el.id === cardDTO.id ? cardDTO : el)
         
         updateCards(cards)
-        
         updateStagesMap(stagesMap)
     }
 }
