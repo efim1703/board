@@ -43,6 +43,10 @@ watch(filteredByProject, () => {
     localStorage.setItem("filteredByProject", JSON.stringify(filteredByProject.value))
 })
 
+watch(cards, () => {
+    localStorage.setItem("cards", JSON.stringify(cards.value))
+})
+
 onBeforeMount(() => {
     const stagesFetch = getParseFetchResponse('/stages.json')
     const cardsFetch = getParseFetchResponse('/cards.json')
