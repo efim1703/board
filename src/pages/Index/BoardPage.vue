@@ -83,6 +83,10 @@ import CardInterface from '@/interfaces/Card/CardInterface';
 import OptionInterface from '@/interfaces/OptionInterface';
 import StagesMapInterface from "@/interfaces/stage/StageMapInterface";
 import IDraggableEvent from "@/interfaces/IDraggableEvent";
+import { useNotification } from "@kyvg/vue3-notification";
+
+
+const { notify}  = useNotification()
 
 const props = defineProps({
     stagesWithFullInfoByCode: {
@@ -173,6 +177,10 @@ const setCardInStage = (card: CardInterface) => {
         const {projectWithFullInfo: _, ...cardDTO} = card
         const cards = [...props.cards].map(el => el.id === cardDTO.id ? cardDTO : el)
         emits('update:cards', cards)
+        notify({
+            title: "Карточка успешно изменена!",
+            type: "success"
+        });
     }
 
     closeCardModal()
@@ -185,6 +193,11 @@ const deleteCard = () => {
     const stagesMap: StagesMapInterface = JSON.parse(JSON.stringify(props.stagesWithFullInfoByCode))
     delete stagesMap[cardDeleteModal.value.stageCode].cards[cardDeleteModal.value.cardId]
     updateStagesMap(stagesMap)
+
+    notify({
+        title: "Карточка удалена!",
+        type: "success"
+    });
 
     closeDeleteCardModal()
 }

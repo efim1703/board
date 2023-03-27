@@ -1,10 +1,6 @@
 <template>
-  <router-view/>
+  <div>
+    <router-view/>
+    <notifications class="notification-block"/>
+  </div>
 </template>
-
-<script lang="ts" setup>
-</script>
-
-<style>
-
-</style>

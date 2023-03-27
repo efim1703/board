@@ -22,7 +22,10 @@ import ProjectDTO from '@/interfaces/Project/ProjectDTO';
 import CardInterface from '@/interfaces/Card/CardInterface';
 import StagesMapInterface from "@/interfaces/stage/StageMapInterface";
 import OptionInterface from "@/interfaces/OptionInterface";
+import { useNotification } from "@kyvg/vue3-notification";
 
+
+const { notify}  = useNotification()
 
 const stagesWithFullInfoByCode = ref({} as StagesMapInterface)
 
@@ -121,14 +124,30 @@ const saveChanges = () => {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(data)
+        }).then(() => {
+            notify({
+                title: "Изменения сохранены!",
+                text: "Вы не потеряете свои данные",
+                type: "success"
+            });
+        }).catch(() => {
+            notify({
+                title: "Изменения не сохранены!",
+                text: "Нам не удалось сохранить данные",
+                type: "error"
+            });
         })
-    })
+    }, 2000)
 }
 
 const addCard = (card: CardInterface) => {
     card.id = new Date().getTime()
     cards.value.push(card)
     stagesWithFullInfoByCode.value[card.stage].cards[card.id] = card
+    notify({
+        title: "Карточка успешно добавлена!",
+        type: "success"
+    });
 }
 
 </script>
