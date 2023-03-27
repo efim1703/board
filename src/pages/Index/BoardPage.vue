@@ -37,7 +37,7 @@
                     @edit-card="$event => openCardModal(stage.code, $event)"
                     @delete-card="$event => openDeleteCardModal(stage.code, $event)"
                     @change-sorting-type="$event => changeSortingTypeInStage(stage.code, $event)"
-                    @move-card="changePositionCard"
+                    @move-card="changeStageCard"
                 />
             </div>
             <custom-modal v-model:value="cardModal.show">
@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, watch, PropType, computed} from 'vue';
+import {ref, watch, PropType, computed, nextTick} from 'vue';
 import StageItem from '@/blocks/board/StageItem.vue';
 import CustomSelect from '@/components/ui/CustomSelect.vue'
 import CustomButton from '@/components/ui/CustomButton.vue';
@@ -170,10 +170,8 @@ const setCardInStage = (card: CardInterface) => {
     if (!card.id) {
         emits('add-card', card)
     } else {
-        let cards = [...props.cards]
-        // @ts-ignore
-        delete card.projectWithFullInfo
-        cards = cards.map(el => el.id === card.id ? card : el)
+        const {projectWithFullInfo: _, ...cardDTO} = card
+        const cards = [...props.cards].map(el => el.id === cardDTO.id ? cardDTO : el)
         emits('update:cards', cards)
     }
 
@@ -182,7 +180,7 @@ const setCardInStage = (card: CardInterface) => {
 
 const deleteCard = () => {
     let cards = [...props.cards].filter(el => el.id !== cardDeleteModal.value.cardId)
-    emits('update:cards', cards)
+    updateCards(cards)
 
     const stagesMap: StagesMapInterface = JSON.parse(JSON.stringify(props.stagesWithFullInfoByCode))
     delete stagesMap[cardDeleteModal.value.stageCode].cards[cardDeleteModal.value.cardId]
@@ -197,7 +195,7 @@ const changeSortingTypeInStage = (stageCode: string, sortingType: StageSortingTy
     updateStagesMap(stagesMap)
 }
 
-const changePositionCard = (params: IDraggableEvent) => {
+const changeStageCard = (params: IDraggableEvent) => {
     // В условии не сказано про порядок карточек при миграции между столбцами если это важно можно ключи мап
     // превратить в строчные значения "_id" и тогда последовательность сохраниться и можно вставлять по индексам
     const stagesMap: StagesMapInterface = JSON.parse(JSON.stringify(props.stagesWithFullInfoByCode))
@@ -208,6 +206,11 @@ const changePositionCard = (params: IDraggableEvent) => {
         card.stage = params.newArrId
         stagesMap[params.newArrId].cards[params.elementId] = card
 
+        const {projectWithFullInfo: _, ...cardDTO} = card
+        const cards = [...props.cards].map(el => el.id === cardDTO.id ? cardDTO : el)
+        
+        updateCards(cards)
+        
         updateStagesMap(stagesMap)
     }
 }
@@ -271,6 +274,10 @@ const updateStagesMap = (stages: StagesMapInterface) => {
 
 const updateFilteredByProject = (filter: OptionInterface | null) => {
     emits('update:filteredByProject', filter)
+}
+
+const updateCards = (cards: CardDTO[]) => {
+    emits('update:cards', cards)
 }
 
 </script>

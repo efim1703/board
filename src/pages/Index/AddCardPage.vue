@@ -68,8 +68,6 @@ watch(() => props.projects, (arr) => {
 }, { deep: true, immediate: true })
 
 const saveCard = (newCard: CardInterface) => {
-    emits('add-card', newCard)
-
     card.value = {
         id: 0,
         title: '',
@@ -78,6 +76,8 @@ const saveCard = (newCard: CardInterface) => {
         projectWithFullInfo: null,
         score: 0,
     }
+
+    emits('add-card', newCard)
 }
 
 </script>
